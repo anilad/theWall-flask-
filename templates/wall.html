@@ -28,6 +28,15 @@
                     <div class="box">
                         <h3 class="userInfo">{{message['first_name']}} {{message['last_name']}} - {{message['created_at']}}</h3>
                         <p>{{message['message']}}</p>
+                        {% if message['time_elapsed']<=30 %}
+                            {% if message['user_id'] == session['id'] %}
+                                <form action="/deleteMsg" method="post">
+                                    <input type="hidden" name="msgId" value="{{message['id']}}">
+                                    <input type="hidden" name="msgTime" value="{{message['msg_time']}}">
+                                    <button class="delete">Delete</button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
                         {% if comments %}
                             {% for comment in comments %}
                                 {% if comment['msg_id'] == message['id'] %}

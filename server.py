@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, render_template, session, flash
 from mysqlconnection import MySQLConnector
+from datetime import datetime, time
 import re, md5, os, binascii
 
 app = Flask(__name__)
@@ -26,13 +27,13 @@ def register():
 
 @app.route('/wall')
 def wall():
-    query = "SELECT first_name, last_name, messages.message, messages.id, DATE_FORMAT(messages.created_at, '%M %D %Y') AS created_at FROM users JOIN messages ON messages.user_id = users.id"
+    query = "SELECT users.id as user_id, first_name, last_name, messages.message, messages.id, DATE_FORMAT(messages.created_at, '%M %D %Y') AS created_at, messages.created_at  As msg_time, TIME_TO_SEC(timediff(NOW(), messages.created_at))/60 AS time_elapsed FROM users JOIN messages ON messages.user_id = users.id"
     join = mysql.query_db(query) 
 
     commentQuery ="SELECT first_name, last_name, comments.comment, DATE_FORMAT(comments.created_at, '%M %D %Y') AS created_at, comments.message_id, messages.id as msg_id  FROM users JOIN comments ON comments.user_id = users.id JOIN messages ON messages.id = comments.message_id"
     commentJoin = mysql.query_db(commentQuery)
-    print join
-    print commentJoin
+    # print join
+    # print commentJoin
 
     return render_template('wall.html', messages=join, comments = commentJoin)
     
@@ -119,8 +120,8 @@ def process():
 
             session['id']= mysql.query_db(insert_query, query_data)
             session['name'] = fName
-            print session['id']
-            print session['name']
+            # print session['id']
+            # print session['name']
             return redirect('/wall')
     else:
         flash('Unable to register')
@@ -136,7 +137,7 @@ def messages():
             'user_id': session['id']
         }
         messages = mysql.query_db(query,data)
-    print messages
+    # print messages
     return redirect('/wall')
 
 @app.route('/comment', methods=['POST'])
@@ -148,7 +149,26 @@ def comments():
         'message_id': request.form['msgId']
     }
     comments = mysql.query_db(query,data)
-    print comments
+    # print comments
+    return redirect('/wall')
+
+@app.route('/deleteMsg', methods=['POST'])
+def deleteMsg():
+    val = request.form['msgId']
+    time = request.form['msgTime']
+    print val
+    print time
+    now = datetime.now()      
+    commentQuery = "DELETE FROM comments WHERE comments.message_id= :message_id"
+    data = {
+        'message_id': val
+    }
+    msgQuery = "DELETE FROM messages WHERE messages.id= :id"
+    data1 = {
+            'id': val
+    }
+    comments = mysql.query_db(commentQuery,data)
+    messages = mysql.query_db(msgQuery,data1)
     return redirect('/wall')
 
 @app.route('/logout')
