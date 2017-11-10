@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Dojo Wall</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Coding Dojo Wall</h1>
+        </header>
+        <h3>User Login</h3>
+        <form action="/login" method="post">
+            
+            <input type="email" name="email" placeholder="Enter Email">
+            <br>
+            
+            <input type="password" name="password" placeholder="Enter Password">
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <p>Not a registered user?</p>
+        <a href="/register">Sign up</a>
+        <br>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <p id="error">{{message}}</p>
+        {% endfor %} {% endif %} {% endwith %}
+    </div>
+</body>
+</html>

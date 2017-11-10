@@ -1,0 +1,65 @@
+.container{
+    margin: 10px auto;
+    width: 75%;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 1px solid black;
+}
+header{
+    text-align: left;
+    background: lightgrey;
+    border-bottom: 1px solid black;
+}
+header>h1{
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 60%;
+}
+input, button{
+    width: 300px;
+    height: 20px;
+    text-align: center;
+    margin: 5px;
+}
+.wall{
+    width: 70%;
+    height: 150px;
+    overflow-wrap: break-word;
+}
+.message{
+    margin-left: 42%;
+    background: lightseagreen;
+}
+.comment{
+    margin-left: 42%;
+    background: lightgreen;
+}
+button{
+    height: 25px;
+    width: 310px;
+}
+p{
+    display: inline-block;
+}
+a{
+    text-decoration: none;
+    color: darkcyan;
+}
+#error{
+    color: red;
+}
+.userInfo{
+    text-align: left;
+    margin-left: 5%;
+}
+.commentBox{
+    width: 65%;
+    height: 100px;
+}
+.box{
+    width: 75%;
+    margin-left: 10%;
+}
+cBox{
+    text-align: right;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Dojo Wall</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Coding Dojo Wall</h1>
+            <p>Welcome {{session['name']}}</p>
+            <a href="/logout">Logout</a>
+        </header>
+        <article>
+            <form action="/message" method="post">
+            <input class="wall" type="textarea" name="message" placeholder="Enter message here">
+            <br>
+            <button class="message"type="submit">Submit</button>
+            </form>
+            <div class="content">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="box">
+                        <h3 class="userInfo">{{message['first_name']}} {{message['last_name']}} - {{message['created_at']}}</h3>
+                        <p>{{message['message']}}</p>
+                        {% if comments %}
+                            {% for comment in comments %}
+                                {% if comment['msg_id'] == message['id'] %}
+                                <div class="cBox">
+                                    <h4>{{comment['first_name']}} {{comment['last_name']}} - {{comment  ['created_at']}}</h4>
+                                    <p>{{comment['comment']}}</p>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <form action="/comment" method="post">
+                            <input type="hidden" name="msgId" value="{{message['id']}}">
+                            <input class="commentBox" type="textarea" name="comment" placeholder="Comment here">
+                            <br>
+                            <button type="submit">Comment</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </article>
+    </div>
+</body>
+
+</html>
