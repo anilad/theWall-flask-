@@ -1,14 +1,18 @@
+body{
+    background-image: url("/static/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 .container{
     margin: 10px auto;
     width: 75%;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    border: 1px solid black;
+    background: rgba(255, 255, 255, 0.315)
 }
 header{
     text-align: left;
-    background: lightgrey;
-    border-bottom: 1px solid black;
+    background: rgba(255, 255, 255, 0.527);
 }
 header>h1{
     display: inline-block;
@@ -21,18 +25,24 @@ input, button{
     text-align: center;
     margin: 5px;
 }
-.wall{
-    width: 70%;
+textarea{
+    width: 80%;
     height: 150px;
     overflow-wrap: break-word;
+    margin: 10px;
+    padding: 5px;
+}
+.commentBox{
+    width: 105%;
+    height: 70px;
 }
 .message{
-    margin-left: 42%;
-    background: lightseagreen;
+    margin-left: 52%;
+    background: #315482;
 }
-.comment{
-    margin-left: 42%;
-    background: lightgreen;
+.commButt{
+    margin-left: 69%;
+    background: lightseagreen;
 }
 button{
     height: 25px;
@@ -48,18 +58,22 @@ a{
 #error{
     color: red;
 }
-.userInfo{
+.content{
     text-align: left;
-    margin-left: 5%;
-}
-.commentBox{
-    width: 65%;
-    height: 100px;
 }
 .box{
     width: 75%;
     margin-left: 10%;
 }
-cBox{
-    text-align: right;
+.box>p{
+    margin-left: 5%;
+}
+.cBox{
+    margin-left: 5%;
+}
+.cBox>h4{
+    color: rgb(108, 44, 139);
+}
+.cBox>p{
+    margin-left: 5%;
 }

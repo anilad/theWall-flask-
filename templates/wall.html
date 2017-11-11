@@ -18,10 +18,11 @@
         </header>
         <article>
             <form action="/message" method="post">
-            <input class="wall" type="textarea" name="message" placeholder="Enter message here">
-            <br>
-            <button class="message"type="submit">Submit</button>
+                <textarea rows="4" cols="50" class="wall" name="message" placeholder="Enter message here"></textarea>
+                <br>
+                <button class="message" type="submit">Submit</button>
             </form>
+
             <div class="content">
                 {% if messages %}
                     {% for message in messages %}
@@ -49,9 +50,10 @@
                         {% endif %}
                         <form action="/comment" method="post">
                             <input type="hidden" name="msgId" value="{{message['id']}}">
-                            <input class="commentBox" type="textarea" name="comment" placeholder="Comment here">
+                            <textarea rows="4" cols="50" class="commentBox" name="comment" placeholder="Enter comment here"></textarea>
+                            
                             <br>
-                            <button type="submit">Comment</button>
+                            <button class="commButt"type="submit">Comment</button>
                         </form>
                     </div>
                     {% endfor %}
